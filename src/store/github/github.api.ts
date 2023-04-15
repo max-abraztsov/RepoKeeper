@@ -1,4 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import { IUser, ServerResponse } from "../../models/models";
 
 
 export const githubApi = createApi({
@@ -8,11 +9,12 @@ export const githubApi = createApi({
 
     }),
     endpoints: build => ({
-        searchUsers: build.query<any, string>({
+        searchUsers: build.query<ServerResponse<IUser>, string>({
             query: (search: string) => ({
                 url: "search/users",
                 params: {
-                  q: search  
+                  q: search,
+                  per_page: 10 
                 },
             })
         })
